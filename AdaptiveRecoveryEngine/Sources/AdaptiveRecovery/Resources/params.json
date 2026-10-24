@@ -1,0 +1,69 @@
+{
+  "version": "0.6",
+  "generated": "2026-10-23",
+  "note": "Tunable defaults from hrv-algorithm-spec.md. ec=true means engineering choice (unsourced). Sources are tags in sources.md.",
+  "baseline": {
+    "metric": "ln_rmssd",
+    "rolling_mean_days": {"value": 7, "ec": false, "sources": ["A-G2", "P2012"]},
+    "baseline_window_days": {"value": 60, "ec": true},
+    "min_readings_per_week": {"value": 3, "ec": false, "sources": ["A-G2"]},
+    "min_history_days_before_decisions": {"value": 14, "ec": true, "sources": ["SEI-X2025", "MAN2021"]},
+    "normal_range": {
+      "METHOD_A_cv_multiplier": {"value": 0.5, "ec": false, "sources": ["FLA2018"]},
+      "METHOD_B_swc_hrv_pct": {"value": 3, "ec": false, "sources": ["A-P2021"]},
+      "METHOD_B_swc_rhr_pct": {"value": 2, "ec": false, "sources": ["A-P2021"]}
+    },
+    "device_loa_hrv_ppg_pct": {"value": 6, "ec": false, "sources": ["BEL2021"]},
+    "cv_scatter_multiplier": {"value": 1.25, "ec": true, "sources": ["SCH2013"]}
+  },
+  "decision": {
+    "states": ["TRAIN_AS_PLANNED", "REDUCE_INTENSITY", "RECOVER", "MEDICAL_REFER"],
+    "above_range_is_green": false,
+    "votes_required_for_recover": {"value": 2, "ec": true, "sources": ["NUU2024", "BUC2014"]},
+    "wellness_window_days": {"value": 28, "ec": true},
+    "wellness_bad_z": {"value": -0.5, "ec": false, "sources": ["FLA2018"]},
+    "persistent_refer_days": {"value": 14, "ec": true, "sources": ["CAR2022", "SCW2016"]},
+    "illness_rr_sd": {"value": 1.0, "ec": true, "sources": ["MIL2020"]},
+    "acwr_decision_input": false
+  },
+  "profiles": {
+    "single_profile_share": {"value": 0.6, "ec": true},
+    "hybrid_inclusion_share": {"value": 0.15, "ec": true},
+    "weekend_warrior_share": {"value": 0.6, "ec": true},
+    "shrinkage_k": {"value": 20, "ec": true},
+    "quiz_prior_n_full": {"value": 20, "ec": true},
+    "quiz_prior_primary_share": {"value": 0.6, "ec": true},
+    "families": ["ENDURANCE", "METCON", "OLY", "STRENGTH", "HYPERTROPHY", "TEAM"],
+    "masters_age": {"value": 40, "ec": true},
+    "masters_extra_dip_days": {"value": 1, "ec": true, "sources": ["LI2024"]},
+    "strength_rir_factor": {"value": {"0": 1.0, "1": 0.8, "2": 0.7, "3+": 0.6}, "ec": true, "sources": ["HEL2016", "REF2023"]}
+  },
+  "substances": {
+    "change_point_window_days": {"value": 14, "ec": true},
+    "change_point_range_multiplier": {"value": 1.5, "ec": true},
+    "actions": ["ANNOTATE", "TIMING", "CHANGE_POINT", "DISABLE_REFER"],
+    "disable_refer": ["beta_blocker", "testosterone_aas_sarms", "untreated_thyroid"],
+    "alcohol_exclude_next_day": {"value": true, "ec": true, "sources": ["A-P2021"]}
+  },
+  "altitude": {
+    "trip_delta_m": {"value": 1000, "ec": true},
+    "visitor_absolute_m": {"value": 2000, "ec": true},
+    "low_home_m": {"value": 500, "ec": true},
+    "resident_days": {"value": 14, "ec": true},
+    "acclimatization_window_days": {"value": 14, "ec": true, "sources": ["PIR2025"]},
+    "range_multiplier": {"value": 1.5, "ec": true},
+    "no_red_from_altitude_alone": true,
+    "return_home_annotate_days": {"value": 7, "ec": true},
+    "ams_symptoms_action": "STOP_DESCEND_MEDICAL_REFER"
+  },
+  "age_ancestry": {
+    "hrmax_formula": {"value": "208 - 0.7*age", "ec": false, "sources": ["ROY2015", "NIK2018"]},
+    "hrmax_uncertainty_bpm": {"value": 10, "ec": false, "sources": ["KAS2023"]},
+    "zone_tops_pct_hrmax": {"value": [70, 80, 87, 93], "ec": true},
+    "ancestry_options": ["Prefer not to say", "South Asian", "East Asian", "Black/African/Caribbean", "White/European", "Hispanic/Latino", "Middle Eastern/North African", "Mixed", "Other"],
+    "ancestry_changes_severity": false,
+    "skin_tone_correction": false,
+    "display_norms": {"south_indian_18_30_short_supine_rmssd_ms": {"M": 57.4, "F": 64.9, "all": 61.6, "sources": ["KUN2021"]}},
+    "older_noise_caveat_age": {"value": 60, "ec": true, "sources": ["COS2025"]}
+  }
+}
